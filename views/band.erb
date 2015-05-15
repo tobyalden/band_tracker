@@ -1,5 +1,30 @@
 <h3><%= @band.name %></h3>
 
+<h5>Venues this band has played at:</h5>
+<ul>
+  <% @attached_venues.each() do |venue| %>
+    <li><%= venue.name() %></li>
+  <% end %>
+</ul>
+
+<br>
+
+<h5>Venues this band has NOT played at:</h5>
+
+<form action='/band/<%= @band.id %>/attach_venues' method='post'>
+  <input type="hidden" name="_method" value="patch">
+    <% @unattached_venues.each() do |venue| %>
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" id="<%= venue.id() %>" name="venue_ids[]" value="<%= venue.id() %>"><%= venue.name() %>
+      </label>
+    </div>
+    <% end %>
+    <button class='btn btn-success' id="attach_venues">Add Selected Venues</button>
+</form>
+
+<br>
+
 <form action="/band/<%=@band.id%>" method="post">
   <input type="hidden" name="_method" value="patch">
   <div class="form-group">

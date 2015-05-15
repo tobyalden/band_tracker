@@ -58,3 +58,21 @@ describe("The path to delete a band", {:type => :feature}) do
     expect(page).to(have_no_content('Boris'))
   end
 end
+
+describe("The path to add a venue to a band", {:type => :feature}) do
+  it("displays a list of venue checkboxes on a band's page, with a button to add any checked venues to the band.") do
+    test_band = Band.create({:name => "Boris"})
+    test_venue = Venue.create({:name => "Roseland"})
+    test_venue2 = Venue.create({:name => "Wonder ballroom"})
+    test_venue3 = Venue.create({:name => "Doug fir lounge"})
+    visit('/')
+    click_button('bands')
+    click_link(test_band.id)
+    check(test_venue.id)
+    check(test_venue3.id)
+    click_button('attach_venues')
+    expect(page.html).to(include("<li>Roseland</li>"))
+    expect(page.html).not_to(include("<li>Wonder ballroom</li>"))
+    expect(page.html).to(include("<li>Doug fir lounge</li>"))
+  end
+end
