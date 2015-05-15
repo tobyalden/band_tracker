@@ -1,1 +1,10 @@
 <h3><%= @band.name %></h3>
+
+<form action="/band/<%=@band.id%>" method="post">
+  <input type="hidden" name="_method" value="patch">
+  <div class="form-group">
+    <label for="new_band_name">Update band name:</label>
+    <input type="text" name="new_band_name" id="new_band_name" class="form-control">
+  </div>
+  <button id="update_band_name" class="btn btn-primary">Update Name</button>
+</form>

@@ -27,11 +27,23 @@ end
 
 describe("The path to a band's page", {:type => :feature}) do
   it("displays a list of all the bands in the database, each of which is a link to that band's page.") do
-    test_band = Band.create({:name => "boris"})
+    test_band = Band.create({:name => "Boris"})
     visit('/')
     click_button('bands')
     click_link(test_band.id)
     expect(page).to(have_content("Boris"))
     expect(page).to(have_no_content("List of Bands:"))
+  end
+end
+
+describe("The path to update a band's name", {:type => :feature}) do
+  it("displays a form on a band's page which updates the band's name when submitted.") do
+    test_band = Band.create({:name => "Boris"})
+    visit('/')
+    click_button('bands')
+    click_link(test_band.id)
+    fill_in('new_band_name', :with => 'Sun 0)))')
+    click_button('update_band_name')
+    expect(page).to(have_content('Sun 0)))'))
   end
 end
