@@ -37,7 +37,7 @@ describe("The path to a band's page", {:type => :feature}) do
 end
 
 describe("The path to update a band's name", {:type => :feature}) do
-  it("displays a form on a band's page which updates the band's name when submitted.") do
+  it("displays a form on a band's page that updates the band's name when submitted.") do
     test_band = Band.create({:name => "Boris"})
     visit('/')
     click_button('bands')
@@ -45,5 +45,16 @@ describe("The path to update a band's name", {:type => :feature}) do
     fill_in('new_band_name', :with => 'Sun 0)))')
     click_button('update_band_name')
     expect(page).to(have_content('Sun 0)))'))
+  end
+end
+
+describe("The path to delete a band", {:type => :feature}) do
+  it("displays a button on a band's page that deletes the band when pressed.") do
+    test_band = Band.create({:name => "Boris"})
+    visit('/')
+    click_button('bands')
+    click_link(test_band.id)
+    click_button('delete_band')
+    expect(page).to(have_no_content('Boris'))
   end
 end

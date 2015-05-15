@@ -8,3 +8,14 @@
   </div>
   <button id="update_band_name" class="btn btn-primary">Update Name</button>
 </form>
+
+<br>
+
+<form action="/band/<%=@band.id%>" method="post">
+  <input type="hidden" name="_method" value="delete">
+  <button id="delete_band" class="btn btn-danger">Delete Band</button>
+</form>
+
+<br>
+
+<a href="/bands">Back</a>
