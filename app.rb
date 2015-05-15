@@ -17,20 +17,20 @@ post('/bands') do
   redirect('/bands')
 end
 
-get('/band/:id') do
+get('/bands/:id') do
   @band = Band.find(params.fetch('id').to_i())
   @attached_venues = @band.venues
   @unattached_venues = Venue.where.not(id: @band.venue_ids)
   erb(:band)
 end
 
-patch('/band/:id') do
+patch('/bands/:id') do
   @band = Band.find(params.fetch('id').to_i())
   @band.update(:name => params.fetch('new_band_name'))
-  redirect('/band/' + @band.id.to_s())
+  redirect('/bands/' + @band.id.to_s())
 end
 
-patch('/band/:id/attach_venues') do
+patch('/bands/:id/attach_venues') do
   @band = Band.find(params.fetch('id').to_i())
   selected_venues = []
   if(params.has_key?('venue_ids'))
@@ -38,10 +38,10 @@ patch('/band/:id/attach_venues') do
       @band.venues.push(Venue.find(venue_id.to_i()))
     end
   end
-  redirect('/band/' + @band.id.to_s())
+  redirect('/bands/' + @band.id.to_s())
 end
 
-delete('/band/:id') do
+delete('/bands/:id') do
   @band = Band.find(params.fetch('id').to_i())
   @band.destroy()
   redirect('/bands')

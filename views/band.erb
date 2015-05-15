@@ -11,7 +11,7 @@
 
 <% if(@unattached_venues.any?) %>
   <h5>Venues this band has NOT played at:</h5>
-  <form action='/band/<%= @band.id %>/attach_venues' method='post'>
+  <form action='/bands/<%= @band.id %>/attach_venues' method='post'>
     <input type="hidden" name="_method" value="patch">
       <% @unattached_venues.each() do |venue| %>
       <div class="checkbox">
@@ -25,7 +25,7 @@
   <br>
 <% end %>
 
-<form action="/band/<%=@band.id%>" method="post">
+<form action="/bands/<%=@band.id%>" method="post">
   <input type="hidden" name="_method" value="patch">
   <div class="form-group">
     <label for="new_band_name">Update band name:</label>
@@ -36,7 +36,7 @@
 
 <br>
 
-<form action="/band/<%=@band.id%>" method="post">
+<form action="/bands/<%=@band.id%>" method="post">
   <input type="hidden" name="_method" value="delete">
   <button id="delete_band" class="btn btn-danger">Delete Band</button>
 </form>
