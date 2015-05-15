@@ -16,3 +16,8 @@ post('/bands') do
   @new_band = Band.create({:name => params.fetch("band_name")})
   redirect('/bands')
 end
+
+get('/band/:id') do
+  @band = Band.find(params.fetch('id').to_i())
+  erb(:band)
+end
